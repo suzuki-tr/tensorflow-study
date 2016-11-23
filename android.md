@@ -19,6 +19,10 @@
  * $ sudo apt-get update
  * $ sudo apt-get install oracle-java8-installer
 
+add-apt-repositoryがないと言われたら
+ * $ sudo apt-get install software-properties-common python-software-properties
+
+
 * Bazelインストール(build tool)
 
  * https://github.com/bazelbuild/bazel/releases

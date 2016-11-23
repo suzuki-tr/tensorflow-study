@@ -11,7 +11,8 @@
 ### 構築
 
 * $ sudo apt-get update
-* $ sudo apt-get install docker-engine
+(* $ sudo apt-get install docker-engine)
+* $ sudo apt-get install docker.io
 
 ### 操作
 
@@ -26,9 +27,12 @@
 	* -t means 擬似ターミナル
 	* -d means detach起動(daemon用)
 * $ sudo docker run -v /home/user/shared:/root/shared -it --name ubuntu1 ubuntu /bin/bash :create new container from image and run bash with shared directory
+* commit container					:commit to image
+	* Ctrl + P + Q
+	* sudo docker ps -a
+	* sudo docker commit <container name> <new image name>
 * $ sudo docker stop
 * $ sudo docker start -i ubuntu1                        :container restart
 * $ sudo docker rm <container id>			:remove container
 * $ sudo docker rmi <image name>			:remove image
-
-* # exit						:コンテナの停止
+* ~# exit						:コンテナの停止

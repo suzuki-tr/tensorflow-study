@@ -59,6 +59,17 @@
 * 参考:https://thinkit.co.jp/story/2015/09/15/6384
 * sudo docker run -v /home/suzuki/docker/shared:/root/shared -it b.gcr.io/tensorflow/tensorflow bash
 
+### 1.5 check the version of tensorflow ,then update
+* http://scriptlife.hacca.jp/contents/programming/2016/08/14/post-1709/
+* checking the version
+	* ~# pip list
+	* tensorflow (0.7.1)
+* update
+	* First update python because of SSL error when update tensorflow (to 0.11)
+	* ~# apt-get update
+	* ~# apt-get upgrade python
+	* ~# pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.11.0rc0-cp27-none-linux_x86_64.whl
+
 
 ## 2. Use TensorFlow function
 
@@ -75,7 +86,38 @@
 
 ## 3.サンプル実行
 
-### 参考サイト
+### 3.1. Retrain Inception with own images
+* https://www.tensorflow.org/versions/r0.11/how_tos/image_retraining/index.html#how-to-retrain-inceptions-final-layer-for-new-categories
+* install bazel
+	* install java
+		* ~# sudo apt-get install software-properties-common python-software-properties
+		* ~# sudo add-apt-repository ppa:webupd8team/java
+		* ~# sudo apt-get update
+		* ~# sudo apt-get install oracle-java8-installer
+	* install bazel
+		* ~# wget https://github.com/bazelbuild/bazel/releases/download/0.3.2/bazel-0.3.2-installer-linux-x86_64.sh
+		* ~# chmod +x bazel-0.3.2-installer-linux-x86_64.sh
+		* ~# ./bazel-0.3.2-installer-linux-x86_64.sh --user
+* build tensorflow
+	* ~# cd tensorflow
+	* ~# ./configure
+* install git
+	* ~# sudo apt-get install git
+* build train tool
+	* ~# bazel build tensorflow/examples/image_retraining:retrain
+
+* Trouble shoot
+	* Error when build train tool
+		* ERROR: /.../BUILD:1826:1: Linking of rule '//tensorflow/python:_pywrap_tensorflow.so' failed: gcc failed: error executing command ...
+	* tensorflow 0.11 -> 0.12
+		* git pull
+	* rebuild
+		* ~# ./coufigure
+
+* train alter dataset
+	* bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir ~/flower_photos
+
+### 3.2. Object Detection
 * https://github.com/Russell91/TensorBox
 
 
