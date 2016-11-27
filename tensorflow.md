@@ -115,9 +115,30 @@
 		* ~# ./coufigure
 
 * train alter dataset
-	* bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir ~/flower_photos
+	* ~# bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir ~/flower_photos
+	* -> /tmp/output_graph.pb output_labels.txt
 
-### 3.2. Object Detection
+### 3.2. for Raspberry Pi
+* https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/pi_examples
+* https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/makefile
+
+	* ~# tensorflow/contrib/makefile/download_dependencies.sh
+	* ~# sudo apt-get install -y autoconf automake libtool gcc-4.8 g++-4.8
+	* ~# cd tensorflow/contrib/makefile/downloads/protobuf/
+	* ~# ./autogen.sh
+	* ~# ./configure
+	* ~# make
+	* ~# sudo make install
+	* ~# sudo ldconfig
+	* ~# cd ../../../../..
+	* ~# make -f tensorflow/contrib/makefile/Makefile HOST_OS=PI TARGET=PI OPTFLAGS="-Os" CXX=g++-4.8
+		* it takes minuts
+	* ~# sudo apt-get install -y libjpeg-dev
+
+	* put trained model(tensorflow_inception_stripped.pb) and label(imagenet_comp_graph_label_strings.txt) in 'label_image/data' directory
+	* ~# make -f tensorflow/contrib/pi_examples/label_image/Makefile
+
+### 3.3. Object Detection
 * https://github.com/Russell91/TensorBox
 
 
